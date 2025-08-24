@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+venv*/
+.venv/
+.env
+*.local.env
+/tmp/
+*.log
+*.out
+*.bak*
+events.db
+.DS_Store
