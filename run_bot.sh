@@ -1,11 +1,14 @@
-#!/bin/bash
+#!/bin/zsh
+cd /Users/s.w.roseburgh/n8n-docker
+mkdir -p "$HOME/Library/Logs/Emerge"
+/usr/bin/printenv >/dev/null
+
 set -a
-source /Users/s.w.roseburgh/n8n-docker/.env
+[ -f .env ] && . ./.env
 set +a
 
-PYTHONWARNINGS="ignore::UserWarning:apscheduler" \
-nohup /Users/s.w.roseburgh/n8n-docker/venv311/bin/python -u \
-  /Users/s.w.roseburgh/n8n-docker/emerge_bot.py \
-  >/tmp/emerge_bot.out 2>&1 &
+if [ -n "$BOT_TOKEN" ]; then
+  /usr/bin/curl -s "https://api.telegram.org/bot${BOT_TOKEN}/setWebhook" -d url= >/dev/null
+fi
 
-echo "🚀 Bot started. Logs: tail -f /tmp/emerge_bot.out"
+exec /Users/s.w.roseburgh/n8n-docker/venv311/bin/python -u /Users/s.w.roseburgh/n8n-docker/emerge_bot.py
