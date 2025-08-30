@@ -10,3 +10,4 @@ venv*/
 *.bak*
 events.db
 .DS_Store
+.env
